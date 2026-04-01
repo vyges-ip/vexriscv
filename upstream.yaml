@@ -1,0 +1,15 @@
+schema_version: "vyges-upstream-v1"
+upstream:
+  type: "standalone"
+  repo: https://github.com/SpinalHDL/VexRiscv
+  commit: 680756065e9e6fc50d8c3d6c58191a16e867d822
+  extracted_at: "2026-04-01T06:13:38Z"
+import:
+  rtl:
+    - path: "."
+      map_to: "rtl"
+  license:
+    - path: "MIT"
+license:
+  spdx: MIT
+  file: LICENSE
