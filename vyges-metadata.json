@@ -6,8 +6,13 @@
   "description": "VexRiscv: highly configurable RISC-V RV32IM CPU with plugin architecture. Supports MMU, FPU, caches, debug via composable plugins. Targets FPGA (Artix-7: 240 MHz, iCE40: 70 MHz). Written in SpinalHDL, generates Verilog.",
   "license": "MIT",
   "maturity": "production",
-  "target": ["asic", "fpga"],
-  "design_type": ["digital"],
+  "target": [
+    "asic",
+    "fpga"
+  ],
+  "design_type": [
+    "digital"
+  ],
   "created": "2026-04-01T06:17:20Z",
   "updated": "2026-04-01T06:17:20Z",
   "source": {
@@ -17,22 +22,176 @@
     "containsEncryptedPayload": false,
     "indexing": true
   },
-  "maintainers": [{"name": "Vyges", "email": "team@vyges.com", "github": "vyges"}],
+  "maintainers": [
+    {
+      "name": "Vyges",
+      "email": "team@vyges.com",
+      "github": "vyges"
+    }
+  ],
   "interfaces": [
-    {"type": "bus", "direction": "master", "protocol": "AXI4", "description": "Instruction and data bus (configurable: AXI4, Wishbone, AHB-Lite, simple bus)"},
-    {"type": "clock", "direction": "input", "port": "clk", "width": 1},
-    {"type": "reset", "direction": "input", "port": "reset", "width": 1},
-    {"type": "interrupt", "direction": "input", "port": "externalInterrupt", "width": 1},
-    {"type": "interrupt", "direction": "input", "port": "timerInterrupt", "width": 1},
-    {"type": "debug", "direction": "slave", "protocol": "JTAG", "description": "Optional JTAG debug interface via plugin"}
+    {
+      "type": "bus",
+      "direction": "master",
+      "protocol": "AXI4",
+      "description": "Instruction and data bus (configurable: AXI4, Wishbone, AHB-Lite, simple bus)",
+      "signals": [
+        {
+          "name": "awaddr",
+          "direction": "input",
+          "type": "address"
+        },
+        {
+          "name": "awvalid",
+          "direction": "input",
+          "type": "control",
+          "width": 1
+        },
+        {
+          "name": "awready",
+          "direction": "output",
+          "type": "control",
+          "width": 1
+        },
+        {
+          "name": "wdata",
+          "direction": "input",
+          "type": "data"
+        },
+        {
+          "name": "wvalid",
+          "direction": "input",
+          "type": "control",
+          "width": 1
+        },
+        {
+          "name": "wready",
+          "direction": "output",
+          "type": "control",
+          "width": 1
+        },
+        {
+          "name": "bresp",
+          "direction": "output",
+          "type": "control",
+          "width": 2
+        },
+        {
+          "name": "bvalid",
+          "direction": "output",
+          "type": "control",
+          "width": 1
+        },
+        {
+          "name": "bready",
+          "direction": "input",
+          "type": "control",
+          "width": 1
+        },
+        {
+          "name": "araddr",
+          "direction": "input",
+          "type": "address"
+        },
+        {
+          "name": "arvalid",
+          "direction": "input",
+          "type": "control",
+          "width": 1
+        },
+        {
+          "name": "arready",
+          "direction": "output",
+          "type": "control",
+          "width": 1
+        },
+        {
+          "name": "rdata",
+          "direction": "output",
+          "type": "data"
+        },
+        {
+          "name": "rresp",
+          "direction": "output",
+          "type": "control",
+          "width": 2
+        },
+        {
+          "name": "rvalid",
+          "direction": "output",
+          "type": "control",
+          "width": 1
+        },
+        {
+          "name": "rready",
+          "direction": "input",
+          "type": "control",
+          "width": 1
+        }
+      ]
+    },
+    {
+      "type": "clock",
+      "direction": "input",
+      "port": "clk",
+      "width": 1
+    },
+    {
+      "type": "reset",
+      "direction": "input",
+      "port": "reset",
+      "width": 1
+    },
+    {
+      "type": "interrupt",
+      "direction": "input",
+      "port": "externalInterrupt",
+      "width": 1
+    },
+    {
+      "type": "interrupt",
+      "direction": "input",
+      "port": "timerInterrupt",
+      "width": 1
+    },
+    {
+      "type": "debug",
+      "direction": "slave",
+      "protocol": "JTAG",
+      "description": "Optional JTAG debug interface via plugin"
+    }
   ],
   "parameters": [
-    {"name": "IBusCachedPlugin", "type": "plugin", "description": "Instruction cache plugin (size, ways, line size configurable)"},
-    {"name": "DBusCachedPlugin", "type": "plugin", "description": "Data cache plugin (size, ways, line size configurable)"},
-    {"name": "MmuPlugin", "type": "plugin", "description": "MMU with TLB for Linux support"},
-    {"name": "FpuPlugin", "type": "plugin", "description": "IEEE 754 single/double precision FPU"},
-    {"name": "CsrPlugin", "type": "plugin", "description": "Machine/Supervisor/User mode CSR support"},
-    {"name": "DecoderSimplePlugin", "type": "plugin", "description": "Instruction decoder (RV32I/M/A/F/D/C extensions)"}
+    {
+      "name": "IBusCachedPlugin",
+      "type": "plugin",
+      "description": "Instruction cache plugin (size, ways, line size configurable)"
+    },
+    {
+      "name": "DBusCachedPlugin",
+      "type": "plugin",
+      "description": "Data cache plugin (size, ways, line size configurable)"
+    },
+    {
+      "name": "MmuPlugin",
+      "type": "plugin",
+      "description": "MMU with TLB for Linux support"
+    },
+    {
+      "name": "FpuPlugin",
+      "type": "plugin",
+      "description": "IEEE 754 single/double precision FPU"
+    },
+    {
+      "name": "CsrPlugin",
+      "type": "plugin",
+      "description": "Machine/Supervisor/User mode CSR support"
+    },
+    {
+      "name": "DecoderSimplePlugin",
+      "type": "plugin",
+      "description": "Instruction decoder (RV32I/M/A/F/D/C extensions)"
+    }
   ],
   "architecture": {
     "type": "processor",
@@ -47,7 +206,34 @@
       "Written in SpinalHDL, generates Verilog for synthesis"
     ]
   },
-  "categories": [{"main_category": "Processing Cores", "sub_category": "RISC-V"}],
-  "trust": {"verification_level": "silicon_proven", "maintained": true},
-  "meta": {"template": {"generator": "manual", "generated_at": "2026-04-01T06:17:20Z"}, "schema": {"version": "1.0.0"}}
+  "categories": [
+    {
+      "main_category": "Processing Cores",
+      "sub_category": "RISC-V"
+    }
+  ],
+  "trust": {
+    "verification_level": "silicon_proven",
+    "maintained": true
+  },
+  "meta": {
+    "template": {
+      "generator": "manual",
+      "generated_at": "2026-04-01T06:17:20Z"
+    },
+    "schema": {
+      "version": "1.0.0"
+    }
+  },
+  "test": {
+    "testbenches": [
+      {
+        "name": "upstream",
+        "path": "tb/",
+        "framework": "upstream",
+        "description": "Upstream project's testbench harness \u2014 see source repo."
+      }
+    ],
+    "coverage": "functional"
+  }
 }
