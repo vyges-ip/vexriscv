@@ -13,3 +13,5 @@ import:
 license:
   spdx: MIT
   file: LICENSE
+
+metadata_locked: true
